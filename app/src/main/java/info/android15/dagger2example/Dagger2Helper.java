@@ -1,3 +1,9 @@
+/**
+ * Apache License
+ * Version 2.0, January 2004
+ * http://www.apache.org/licenses/
+ */
+
 package info.android15.dagger2example;
 
 import android.util.Log;
@@ -7,6 +13,9 @@ import java.util.HashMap;
 
 public class Dagger2Helper {
     /**
+     * This method is based on https://github.com/square/mortar/blob/master/dagger2support/src/main/java/mortar/dagger2support/Dagger2.java
+     * file that has been released with Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ by Square.
+     *
      * Magic method that creates a component with its dependencies set, by reflection. Relies on
      * Dagger2 naming conventions.
      */
