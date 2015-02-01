@@ -1,20 +1,15 @@
-/**
- * Apache License
- * Version 2.0, January 2004
- * http://www.apache.org/licenses/
- */
-
 package info.android15.dagger2example;
-
-import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class Dagger2Helper {
+
+    private static HashMap<Class<?>, HashMap<Class<?>, Method>> componentsMethodsCache = new HashMap<>();
+
     /**
      * This method is based on https://github.com/square/mortar/blob/master/dagger2support/src/main/java/mortar/dagger2support/Dagger2.java
-     * file that has been released with Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ by Square.
+     * file that has been released with Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ by Square, Inc.
      *
      * Magic method that creates a component with its dependencies set, by reflection. Relies on
      * Dagger2 naming conventions.
@@ -28,17 +23,13 @@ public class Dagger2Helper {
         String generatedName = (packageName + ".Dagger_" + simpleName).replace('$', '_');
 
         try {
-            //+build injection cache
-            long time1 = System.nanoTime();
-            HashMap<Class<?>, Method> componentCache = new HashMap<>();
+            HashMap<Class<?>, Method> methodsCache = new HashMap<>();
             for (Method method : componentClass.getMethods()) {
                 Class<?>[] params = method.getParameterTypes();
                 if (params.length == 1)
-                    componentCache.put(params[0], method);
+                    methodsCache.put(params[0], method);
             }
-            cache.put(componentClass, componentCache);
-            Log.v(Dagger2Helper.class.getSimpleName(), "build injection cache took " + (System.nanoTime() - time1) / 1000000 + " ms");
-            //-build injection cache
+            componentsMethodsCache.put(componentClass, methodsCache);
 
             Class<?> generatedClass = Class.forName(generatedName);
             Object builder = generatedClass.getMethod("builder").invoke(null);
@@ -55,7 +46,6 @@ public class Dagger2Helper {
                     }
                 }
             }
-            Log.v(Dagger2Helper.class.getSimpleName(), "build injection cache + builder instantiation took " + (System.nanoTime() - time1) / 1000000 + " ms");
             //noinspection unchecked
             return (T)builder.getClass().getMethod("build").invoke(builder);
         }
@@ -64,11 +54,9 @@ public class Dagger2Helper {
         }
     }
 
-    static HashMap<Class<?>, HashMap<Class<?>, Method>> cache = new HashMap<>();
-
     public static void inject(Class<?> componentClass, Object component, Object target) {
         try {
-            cache.get(componentClass).get(target.getClass()).invoke(component, target);
+            componentsMethodsCache.get(componentClass).get(target.getClass()).invoke(component, target);
         }
         catch (Exception e) {
             throw new RuntimeException(e);

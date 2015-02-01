@@ -27,14 +27,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         MyApplication.inject(this);
         setContentView(R.layout.activity_main);
-        pref.contains("hello");
-        logger.log();
 
+        pref.toString();
+
+        logger.log();
         new PreferencesCounter().count();
-
         logger.log();
 
-        Log.v(getClass().getSimpleName(), "============ manual instantiation");
         RealTarget target = new RealTarget();
         target.check();
 

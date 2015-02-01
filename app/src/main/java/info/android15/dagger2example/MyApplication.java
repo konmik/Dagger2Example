@@ -8,7 +8,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//            component = Dagger_AppComponent.builder().appModule(new AppModule(this)).build();
+        // component = Dagger_AppComponent.builder().appModule(new AppModule(this)).build();
         component = Dagger2Helper.buildComponent(AppComponent.class, new AppModule(this));
     }
 
