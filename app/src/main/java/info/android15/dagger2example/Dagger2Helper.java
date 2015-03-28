@@ -50,13 +50,13 @@ public class Dagger2Helper {
 
     private static <T> void buildMethodsCache(Class<T> componentClass) {
         if (!Dagger2Helper.methodsCache.containsKey(componentClass)) {
-            HashMap<Class<?>, Method> methodsCache = new HashMap<>();
+            HashMap<Class<?>, Method> methods = new HashMap<>();
             for (Method method : componentClass.getMethods()) {
                 Class<?>[] params = method.getParameterTypes();
                 if (params.length == 1)
-                    methodsCache.put(params[0], method);
+                    methods.put(params[0], method);
             }
-            Dagger2Helper.methodsCache.put(componentClass, methodsCache);
+            Dagger2Helper.methodsCache.put(componentClass, methods);
         }
     }
 
