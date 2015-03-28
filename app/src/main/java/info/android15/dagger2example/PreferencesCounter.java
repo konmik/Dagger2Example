@@ -14,6 +14,6 @@ public class PreferencesCounter {
     }
 
     public void count() {
-        pref.edit().putInt(COUNTER_KEY, pref.getInt(COUNTER_KEY, 0) + 1).commit();
+        pref.edit().putInt(COUNTER_KEY, pref.getInt(COUNTER_KEY, 0) + 1).apply();
     }
 }

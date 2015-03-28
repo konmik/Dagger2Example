@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "22.0.0"
 
     defaultConfig {
         applicationId "info.android15.dagger2example"
-        minSdkVersion 10
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -16,11 +16,14 @@ android {
             minifyEnabled false
         }
     }
+    lintOptions {
+        abortOnError false // ignoring some references from dagger-compiler
+    }
 }
 
 dependencies {
     compile 'javax.inject:javax.inject:1'
     compile 'javax.annotation:javax.annotation-api:1.2'
-    compile files('libs/dagger-2.0-20150122.022617-13.jar')
-    provided files('libs/dagger-compiler-2.0-20150122.022637-13-jar-with-dependencies.jar')
+    compile files('libs/dagger-2.0-20150318.194502-17.jar')
+    provided files('libs/dagger-compiler-2.0-20150318.194524-17-jar-with-dependencies.jar')
 }

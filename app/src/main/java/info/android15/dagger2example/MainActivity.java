@@ -28,8 +28,6 @@ public class MainActivity extends Activity {
         MyApplication.inject(this);
         setContentView(R.layout.activity_main);
 
-        pref.toString();
-
         logger.log();
         new PreferencesCounter().count();
         logger.log();
@@ -40,7 +38,7 @@ public class MainActivity extends Activity {
         ArrayList<Object> dummy = new ArrayList<>();
         try {
             for (int i = 1; i <= DUMMY_COUNT; i++)
-                dummy.add(Class.forName("info.android15.dagger2example.dummy.Dummy" + String.format("%02d", i)).getConstructor(null).newInstance(null));
+                dummy.add(Class.forName("info.android15.dagger2example.dummy.Dummy" + String.format("%02d", i)).getConstructor().newInstance((Object[])null));
         }
         catch (Exception ignored) {
         }

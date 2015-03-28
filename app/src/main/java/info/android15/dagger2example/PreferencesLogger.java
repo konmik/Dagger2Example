@@ -9,11 +9,10 @@ import javax.inject.Inject;
 
 public class PreferencesLogger {
 
-    private SharedPreferences pref;
+    @Inject SharedPreferences pref;
 
     @Inject
-    public PreferencesLogger(SharedPreferences pref) {
-        this.pref = pref;
+    public PreferencesLogger() {
     }
 
     public void log() {
