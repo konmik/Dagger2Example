@@ -24,6 +24,6 @@ android {
 dependencies {
     compile 'javax.inject:javax.inject:1'
     compile 'javax.annotation:javax.annotation-api:1.2'
-    compile files('libs/dagger-2.0-20150318.194502-17.jar')
-    provided files('libs/dagger-compiler-2.0-20150318.194524-17-jar-with-dependencies.jar')
+    compile 'com.google.dagger:dagger:2.0'
+    provided 'com.google.dagger:dagger-compiler:2.0'
 }

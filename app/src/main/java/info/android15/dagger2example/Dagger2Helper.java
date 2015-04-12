@@ -22,7 +22,7 @@ public class Dagger2Helper {
         String packageName = componentClass.getPackage().getName();
         // Accounts for inner classes, ie MyApplication$Component
         String simpleName = fqn.substring(packageName.length() + 1);
-        String generatedName = (packageName + ".Dagger_" + simpleName).replace('$', '_');
+        String generatedName = (packageName + ".Dagger" + simpleName).replace('$', '_');
 
         try {
             Class<?> generatedClass = Class.forName(generatedName);
